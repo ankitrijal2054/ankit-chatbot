@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 250 100% 99%;
+    --foreground: 230 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 230 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 15% 15%;
+
+    --primary: 263 85% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 250 100% 97%;
+    --secondary-foreground: 230 15% 25%;
+
+    --muted: 250 100% 96%;
+    --muted-foreground: 230 10% 50%;
+
+    --accent: 263 85% 96%;
+    --accent-foreground: 263 85% 25%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 250 60% 90%;
+    --input: 250 60% 94%;
+    --ring: 263 85% 65%;
+
+    --radius: 0.75rem;
+
+    /* Chat-specific tokens */
+    --chat-user-bg: 263 85% 65%;
+    --chat-user-foreground: 0 0% 100%;
+    --chat-assistant-bg: 250 100% 97%;
+    --chat-assistant-foreground: 230 15% 15%;
+    
+    /* Voice mode */
+    --voice-primary: 142 76% 36%;
+    --voice-recording: 0 85% 60%;
+    --voice-pulse: 263 85% 65%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+    --gradient-header: linear-gradient(90deg, hsl(var(--primary)), hsl(263 85% 75%));
+    --gradient-glow: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(263 85% 95%));
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 230 25% 8%;
+    --foreground: 250 100% 95%;
+
+    --card: 230 25% 10%;
+    --card-foreground: 250 100% 95%;
+
+    --popover: 230 25% 10%;
+    --popover-foreground: 250 100% 95%;
+
+    --primary: 263 85% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 230 25% 12%;
+    --secondary-foreground: 250 100% 85%;
+
+    --muted: 230 25% 12%;
+    --muted-foreground: 250 100% 60%;
+
+    --accent: 230 25% 15%;
+    --accent-foreground: 263 85% 75%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 230 25% 15%;
+    --input: 230 25% 12%;
+    --ring: 263 85% 65%;
+
+    /* Chat-specific tokens - dark mode */
+    --chat-user-bg: 263 85% 65%;
+    --chat-user-foreground: 0 0% 100%;
+    --chat-assistant-bg: 230 25% 12%;
+    --chat-assistant-foreground: 250 100% 85%;
+    
+    /* Voice mode - dark */
+    --voice-primary: 142 76% 45%;
+    --voice-recording: 0 85% 65%;
+    --voice-pulse: 263 85% 75%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "cv02", "cv03", "cv04";
+  }
+
+  /* Chat bubbles */
+  .chat-bubble-user {
+    @apply rounded-2xl rounded-br-md px-4 py-3 max-w-[80%] ml-auto;
+    background: hsl(var(--chat-user-bg));
+    color: hsl(var(--chat-user-foreground));
+  }
+
+  .chat-bubble-assistant {
+    @apply rounded-2xl rounded-bl-md px-4 py-3 max-w-[85%] mr-auto;
+    background: hsl(var(--chat-assistant-bg));
+    color: hsl(var(--chat-assistant-foreground));
+    border: 1px solid hsl(var(--border));
+  }
+
+  /* Voice animations */
+  .voice-pulse {
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .voice-recording {
+    animation: recording-pulse 1.5s ease-in-out infinite;
+  }
+
+  .typing-indicator {
+    animation: typing-dots 1.5s ease-in-out infinite;
+  }
+
+  /* Typewriter cursor */
+  .typewriter-cursor::after {
+    content: '|';
+    animation: cursor-blink 1s infinite;
+    opacity: 1;
+  }
+
+  /* Smooth scrolling */
+  .chat-scroll {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
+  .chat-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .chat-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .chat-scroll::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .chat-scroll::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes recording-pulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes typing-dots {
+  0%, 60%, 100% {
+    transform: initial;
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes cursor-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
