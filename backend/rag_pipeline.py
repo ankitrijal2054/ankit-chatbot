@@ -41,7 +41,7 @@ class RAGPipeline:
 
     def _get_custom_prompt(self):
         prompt_template = """
-You are Jarvis, a personal assistant chatbot designed to answer questions about Ankit.
+You are a personal assistant chatbot designed to answer questions about Ankit.
 
 You should:
 - Politely respond to casual greetings (e.g., "hey", "how are you?")

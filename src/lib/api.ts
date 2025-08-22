@@ -45,7 +45,6 @@ export async function sendChatMessage(
   }
 
   const contentType = response.headers.get("content-type");
-
   // Handle streaming response
   if (
     contentType?.includes("text/event-stream") ||
@@ -74,7 +73,6 @@ export async function sendChatMessage(
     } finally {
       reader.releaseLock();
     }
-
     return fullResponse;
   }
 

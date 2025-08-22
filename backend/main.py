@@ -13,7 +13,7 @@ settings = get_settings()
 
 # Initialize app
 app = FastAPI(
-    title="JARVIS Personal Assistant",
+    title="Personal Assistant",
     version="1.0",
     description="A chatbot that answers questions specifically about Ankit using LangChain + Gemini Flash."
 )
@@ -51,7 +51,7 @@ async def chat(req: ChatRequest):
         response = response_data["response"]
         return {
             "response": response,
-            "sender": "jarvis",
+            "sender": "assistant",
             "timestamp": datetime.now().isoformat()
         }
     except Exception as e:
@@ -119,7 +119,7 @@ async def health():
 @app.get("/")
 async def root():
     return {
-        "message": "JARVIS API",
+        "message": "ASSISTANT API",
         "version": "1.0",
         "description": "Chatbot for answering questions about Ankit.",
         "endpoints": ["/chat", "/new_chat", "/voice", "/health"],

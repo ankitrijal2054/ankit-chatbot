@@ -103,13 +103,19 @@ export function useChat() {
       addMessage(assistantMessage);
 
       try {
-        await sendChatMessage(
+        let streamed = false;
+        const response = await sendChatMessage(
           { message: content.trim(), mode },
           (chunk: string) => {
+            streamed = true;
             // Handle streaming chunks
             updateLastMessage((prev) => prev + chunk);
           }
         );
+        // If not streamed, update with full response
+        if (!streamed) {
+          updateLastMessage(() => response);
+        }
       } catch (error) {
         console.error("Failed to send message:", error);
         updateLastMessage(
