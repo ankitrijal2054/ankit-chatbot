@@ -1,0 +1,23 @@
+name: Manual Environment Job
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment (dev, qa, prod)'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - qa
+          - prod
+
+jobs:
+  placeholder-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo environment
+        run: echo "Running job for ${{ github.event.inputs.environment }} environment"
+      - name: Placeholder step
+        run: echo "This is a placeholder job. Add your steps here."
